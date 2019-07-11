@@ -152,8 +152,8 @@ fun! InsertHeadPl()
     call append(4, "# ")
     call append(5, "# Objetivo do script: ")
     call append(6, "use strict;")
-    call append(7, "use warnings")
-    call append(8, "use Data::Dumper")
+    call append(7, "use warnings;")
+    call append(8, "use Data::Dumper;")
     normal($)
 endfun
 map ,pl :call InsertHeadPl()<cr>A
