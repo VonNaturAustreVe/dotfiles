@@ -1,7 +1,7 @@
 " VIMrc do Herberson - hmiranda@0fx66.com
 " Criado em 19-01-2017
-" Alterado em 19-01-2017
-"
+" Alterado em 19-08-2019
+
 execute pathogen#infect()
 
 " Sintaxe colorida
@@ -26,9 +26,11 @@ set magic                       " Ativa as regex magicas :)
 set title                       " Muda o titulo do terminal
 set pastetoggle=<F2>            " Modo de copiar e colar
 
-" show location
+" Exibe o curso como coluna
 "set cursorcolumn
-"set cursorline
+
+" Exibe a linha
+set cursorline
 
 " Configura exibicao
 set ruler                       " Mostra linha e coluna
@@ -59,38 +61,15 @@ set softtabstop=4                " Insere tab e backspace quando tiver 4 espacos
 noremap <F8> :nohl<CR>           
 inoremap <F8> <Esc>:nohl<CR>a
 
-"Marca linha do cursor
-set cursorline
-
 " Configura automatico para scripts em ansible
 autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
-autocmd FileType yml setlocal et ts=2 ai sw=2 nu sts=0
-
 au BufRead,BufNewFile *.yaml set filetype=yaml.ansible
-au BufRead,BufNewFile *.yml set filetype=yaml.ansible
 
-" Nerdtree like - Ajusta o Vex
-"let g:netrw_banner = 0
-"let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"let g:netrw_winsize = 15
-"let g:netrw_browse_split = 3
-"augroup ProjectDrawer 
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
+" Ativa o vim-airline paratabs
+"let g:airline#extensions#tabline#enabled = 1
 
 " Ativa o nerdtree com ctrl+x
 nmap <C-x> :NERDTreeToggle<CR>
-
-" Movimentacao entre abas
-noremap <C-j> :<C-U>tabnext<CR>
-noremap <C-l> :<C-U>tabprevious<CR>
-
-
-" Inicia o nerdtree quando o vim abrir
-autocmd vimenter * NERDTree
 
 " Melhora a interface do nerdtree
 let NERDTreeMinimalUI = 1
@@ -98,6 +77,13 @@ let NERDTreeDirArrows = 1
 
 " Encerra o nerdtree se a ultima aba for fechada
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Movimentacao entre abas
+noremap <C-j> :<C-U>tabnext<CR>
+noremap <C-l> :<C-U>tabprevious<CR>
+
+" Inicia o nerdtree quando o vim abrir
+autocmd vimenter * NERDTree
 
 " Ativa o suporte a tags e ctags com a tecla f7
 nmap <F7> :TagbarToggle<CR>
@@ -122,12 +108,14 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_perl_checker = 1
+
+" Configure ctrlp plugin
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " Cria um cabeçalho para scripts bash
 fun! InsertHeadBash()
@@ -152,8 +140,21 @@ fun! InsertHeadPl()
     call append(4, "# ")
     call append(5, "# Objetivo do script: ")
     call append(6, "use strict;")
-    call append(7, "use warnings;")
-    call append(8, "use Data::Dumper;")
+    call append(7, "use warnings")
+    call append(8, "use Data::Dumper")
     normal($)
 endfun
 map ,pl :call InsertHeadPl()<cr>A
+
+"OBSOLETOS
+" Nerdtree like - Ajusta o Vex
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 15
+"let g:netrw_browse_split = 3
+"augroup ProjectDrawer 
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
