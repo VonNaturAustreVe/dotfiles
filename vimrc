@@ -2,7 +2,10 @@
 " Criado em 19-01-2017
 " Alterado em 19-08-2019
 
+" Ativa o plugin pathogen
 execute pathogen#infect()
+call pathogen#infect() 
+call pathogen#helptags()
 
 " Sintaxe colorida
 syntax on
@@ -19,12 +22,20 @@ filetype plugin on
 " Ativa o suporte a identacao
 filetype indent on
 
-" Confiuracoes de base
-set nocompatible                " Nao mantem a compatibilidade com o VI
-set autoread                    " Recarrega os arquivos modificados 
-set magic                       " Ativa as regex magicas :)
-set title                       " Muda o titulo do terminal
-set pastetoggle=<F2>            " Modo de copiar e colar
+" Nao mantem a compatibilidade com o VI
+set nocompatible                
+
+" Recarrega os arquivos modificados 
+set autoread                   
+
+" Ativa as regex magicas :)
+set magic                       
+
+ " Muda o titulo do terminal
+set title                      
+
+" Modo de copiar e colar
+set pastetoggle=<F2>            
 
 " Exibe o curso como coluna
 "set cursorcolumn
@@ -32,30 +43,53 @@ set pastetoggle=<F2>            " Modo de copiar e colar
 " Exibe a linha
 set cursorline
 
-" Configura exibicao
-set ruler                       " Mostra linha e coluna
-set number                      " Numero de linhas
+" Mostra linha e coluna
+set ruler                       
+
+" Numero de linhas
+set number                      
+
+" Desativa a quebra de linhas
 set nowrap
-set showcmd                     " Mostra os comandos incompletos
-set showmode                    " Mostra o modo de operacao
-set showmatch                   " Marca os ({[
 
-" Configura as pesquisas
-set hlsearch                    " Destaca os resultados
-set incsearch                   " Pesquisa incremental
-set ignorecase                  " Ignore Case
-set smartcase                   " Ignore case inteligente
+" Mostra os comandos incompletos
+set showcmd                     
 
-" Configura o tab
-set expandtab                   " Expande os tabs para espacos
+ " Mostra o modo de operacao
+set showmode                   
+
+" Marca os ({[
+set showmatch                   
+
+" Destaca os resultados
+set hlsearch                    
+
+" Pesquisa incremental
+set incsearch                   
+
+" Ignore Case
+set ignorecase                  
+
+" Ignore case inteligente
+set smartcase                   
+
+" Expande os tabs para espacos
+set expandtab                   
+
+" Tecla tab de acordo com a identacao anterior
 set smarttab
-set shiftround
 
 " Configura a identacao
 set autoindent smartindent shiftround
+
+"When shifting, indent using four spaces
 set shiftwidth=4
+
+" Indent using four spaces
 set tabstop=4
-set softtabstop=4                " Insere tab e backspace quando tiver 4 espacos
+
+" Insere tab e backspace quando tiver 4 espacos
+set softtabstop=4                
 
 " Desliga o destaque
 noremap <F8> :nohl<CR>           
@@ -64,9 +98,6 @@ inoremap <F8> <Esc>:nohl<CR>a
 " Configura automatico para scripts em ansible
 autocmd FileType yaml setlocal et ts=2 ai sw=2 nu sts=0
 au BufRead,BufNewFile *.yaml set filetype=yaml.ansible
-
-" Ativa o vim-airline paratabs
-"let g:airline#extensions#tabline#enabled = 1
 
 " Ativa o nerdtree com ctrl+x
 nmap <C-x> :NERDTreeToggle<CR>
@@ -140,21 +171,8 @@ fun! InsertHeadPl()
     call append(4, "# ")
     call append(5, "# Objetivo do script: ")
     call append(6, "use strict;")
-    call append(7, "use warnings")
-    call append(8, "use Data::Dumper")
+    call append(7, "use warnings;")
+    call append(8, "use Data::Dumper;")
     normal($)
 endfun
 map ,pl :call InsertHeadPl()<cr>A
-
-"OBSOLETOS
-" Nerdtree like - Ajusta o Vex
-"let g:netrw_banner = 0
-"let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"let g:netrw_winsize = 15
-"let g:netrw_browse_split = 3
-"augroup ProjectDrawer 
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
